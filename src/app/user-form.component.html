@@ -1,0 +1,62 @@
+<div>
+<h1>User form</h1>
+<form (ngSubmit)="onSubmit()" #userForm="ngForm">
+<div>
+<label for="fristName">First Name</label>
+<input type="text" id="firstName" required [(ngModel)]='model.firstName'
+name="firstName"
+#firstName='ngModel'
+minlength="3"
+/>
+<div *ngIf='firstName.touched && firstName.errors'>
+<div *ngIf='firstName.errors.required'>
+First Name is required
+</div>
+<diV *ngIf='firstName.errors.minlength'>
+First Name should be minimum 3 characters
+</diV>
+</div>
+</div>
+
+<div>
+<label for="email">Email</label>
+<input type="text" id="email" required [(ngModel)]='model.email'
+name="email"
+#email='ngModel'
+minlength="3"
+/>
+<div *ngIf='email.touched && email.errors'>
+
+<div *ngIf='email.errors.required'>
+Email is required
+</div>
+
+<diV *ngIf='email.errors.minlength'>
+Email should be minimum 3 characters
+</diV>
+
+</div>
+
+</div>
+
+<div>
+<label for="country">County</label>
+<select id="country" [(ngModel)]='model.country' name="country">
+<option *ngFor='let c of countries' [value]='c'>{{c}}</option>
+
+</select>
+</div>
+
+<button [disabled]='!userForm.form.valid' type="submit">Submit</button>
+
+</form>
+</div>
+
+<div [hidden]='!submitted' >
+You submitted the following:
+First Name: {{model.firstName}}<br>
+Email : {{model.email}}<br>
+County : {{model.country}}
+
+<button (click)='submitted=false'>Remove</button>
+</div>
